@@ -16,7 +16,7 @@ pipeline {
         expression { params.cleanSource }
       }
       steps {
-        sh "rm -rf "${env.SOURCE_DIR}"
+        sh "rm -rf ${env.SOURCE_DIR}"
       }
     }
     stage('Clone source') {
