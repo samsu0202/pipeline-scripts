@@ -60,6 +60,7 @@ pipeline {
             cd ${env.DOCKER_MOUNT_SOURCE_DIR}
             make ${targetOpt}_default
             make all
+          """
         }
       }
     }
