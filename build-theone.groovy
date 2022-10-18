@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
     SOURCE_DIR = "${env.WORKSPACE}/source"
+    DOCKER_MOUNT_SOURCE_DIR = "/data/source"
   }
   parameters {
     booleanParam(name: 'cleanSource', defaultValue: false, description: 'Clean the source code folder')
@@ -30,6 +31,35 @@ pipeline {
             git submodule sync
             git submodule update --init --recursive
           """
+        }
+      }
+    }
+    stage('Build') {
+      agent {
+        docker {
+          image 'theone-build:latest'
+          registryUrl "${env.PRIVATE_DOCKER_REGISTRY_SERVER}"
+          args """-v /etc/group:/etc/group:ro 
+            -v /etc/passwd:/etc/passwd:ro 
+            -v /etc/shadow:/etc/shadow:ro 
+            -v ${env.SOURCE_DIR}/:${env.DOCKER_MOUNT_SOURCE_DIR}"""
+          }
+      }
+      steps {
+        script {
+          def targetOpt = -1
+          if (params.platform == 'Amba') {
+            targetOpt = 12
+          } else if (params.platform == 'SStar') {
+            targetOpt = 11
+          } else {
+            error("Platfom ${params.platform} not supported")
+          }
+          
+          sh """
+            cd ${env.DOCKER_MOUNT_SOURCE_DIR}
+            make ${targetOpt}_default
+            make all
         }
       }
     }
