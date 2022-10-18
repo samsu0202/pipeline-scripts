@@ -3,6 +3,9 @@ pipeline {
   environment {
     SOURCE_DIR = "${env.WORKSPACE}/source"
   }
+  parameters {
+    booleanParam(name: 'cleanSource', defaultValue: false, description: 'Clean the source code folder')
+  }
   stages {
     stage('test') {
       steps {
