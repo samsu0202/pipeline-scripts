@@ -3,8 +3,6 @@ pipeline {
   environment {
     SOURCE_DIR = "${env.WORKSPACE}/source"
   }
-  parameters {
-  }
   stages {
     stage('test') {
       steps {
