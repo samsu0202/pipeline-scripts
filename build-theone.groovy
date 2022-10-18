@@ -1,9 +1,27 @@
 pipeline {
   agent any
+  environment {
+    SOURCE_DIR = "${env.WORKSPACE}/source"
+  }
+  parameters {
+  }
   stages {
-    stage("Clone source") {
+    stage('test') {
       steps {
-        dir('source') {
+        echo params.platform
+      }
+    }
+    stage('Clean source') {
+      when {
+        expression { params.cleanSource }
+      }
+      steps {
+        sh "rm -rf "${env.SOURCE_DIR}"
+      }
+    }
+    stage('Clone source') {
+      steps {
+        dir("${env.SOURCE_DIR}") {
           git credentialsId: 'vault-git-sdd-aws-acuity', branch:'main', url: 'https://sdd-gitlab.vivotek.tw/aws-acuity/ci-test.git'
           // replace submodules from ssh to https because we use deploy token for CI
           sh """
