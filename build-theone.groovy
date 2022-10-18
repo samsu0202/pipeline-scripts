@@ -47,11 +47,11 @@ pipeline {
       }
       steps {
         script {
-          def targetOpt = -1
+          def targetOpt = ''
           if (params.platform == 'Amba') {
-            targetOpt = 12
+            targetOpt = 'VIVOTEK/VSaaS/ambas6l'
           } else if (params.platform == 'SStar') {
-            targetOpt = 11
+            targetOpt = 'VIVOTEK/VSaaS/sigmastar'
           } else {
             error("Platfom ${params.platform} not supported")
           }
