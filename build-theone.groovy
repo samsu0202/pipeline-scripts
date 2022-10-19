@@ -58,7 +58,6 @@ pipeline {
 
           buildId = sh(script: 'whoami', returnStdout: true)
           sh """
-            // for ccache
             mkdir -p /home/${buildId}
             cd ${env.DOCKER_MOUNT_SOURCE_DIR}
             make ${targetOpt}_default
