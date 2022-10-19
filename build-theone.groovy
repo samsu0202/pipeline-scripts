@@ -55,8 +55,10 @@ pipeline {
           } else {
             error("Platfom ${params.platform} not supported")
           }
-          
+
+          buildId = sh(script: 'whoami', returnStdout: true)
           sh """
+            mkdir -p /home/${buildId}
             cd ${env.DOCKER_MOUNT_SOURCE_DIR}
             make ${targetOpt}_default
             make all
