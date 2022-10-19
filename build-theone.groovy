@@ -7,6 +7,9 @@ pipeline {
   parameters {
     booleanParam(name: 'cleanSource', defaultValue: false, description: 'Clean the source code folder')
   }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '20'))
+  }
   stages {
     stage('Clean source') {
       when {
