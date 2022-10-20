@@ -7,7 +7,23 @@ pipeline {
             steps {
                 script {
                     VSAAS_PLATFORMS.each { platform ->
-                        echo platform
+                        pipelineJob("Theone-$platform") {
+                            definition {
+                              cpsScm {
+                                scm {
+                                  git {
+                                    remote {
+                                      github('samsu0202/pipeline-scripts')
+                                    }
+                                  }
+                                }
+                                scriptPath('build-theone.groovy')
+                              }
+                            }
+                            parameters {
+                              stringParam('platform', "$platform", "$platform")
+                            }
+                      }
                     }
                 }
                 // jobDsl  targets: ['*.groovy'].join('\n')
