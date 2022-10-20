@@ -1,5 +1,3 @@
-def VSAAS_PLATFORMS = ['Amba', 'SStar']
-
 pipeline {
     agent any 
     stages {
