@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Pipeline to seed or update all pipelines') {
             steps {
-                scripts {
+                script {
                     $VSaaSPlatforms.each { platform ->
                         echo $platform
                     }
