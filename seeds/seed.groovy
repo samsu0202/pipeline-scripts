@@ -7,7 +7,7 @@ pipeline {
             steps {
                 jobDsl targets: ['packageSeed.groovy'].join('\n'),
                        removedJobAction: 'DELETE',
-                       removedViewAction: 'DELETE
+                       removedViewAction: 'DELETE'
             }
         }
     }
