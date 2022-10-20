@@ -7,6 +7,8 @@ PLATFORMS.each { platform ->
     pipelineJob("packages/Theone-$platform-test") {
         definition {
             cps {
+                // add "this" to fix "Scripts not permitted"
+                // https://issues.jenkins.io/browse/JENKINS-45778
                 script(this.readFileFromWorkspace('build-theone.groovy'))
                 sandbox()
             }
