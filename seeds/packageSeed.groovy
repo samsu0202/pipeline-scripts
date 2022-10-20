@@ -7,7 +7,7 @@ PLATFORMS.each { platform ->
     pipelineJob("packages/Theone-$platform-test") {
         definition {
             cps {
-                script(readFileFromWorkspace('build-theone.groovy'))
+                script(this.readFileFromWorkspace('build-theone.groovy'))
                 sandbox()
             }
         }
