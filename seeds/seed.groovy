@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Pipeline to seed or update all pipelines') {
             steps {
-                jobDsl targets: ['packageSeed.groovy'].join('\n'),
+                jobDsl targets: ['seeds/packageSeed.groovy'].join('\n'),
                        removedJobAction: 'DELETE',
                        removedViewAction: 'DELETE'
             }
