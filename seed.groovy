@@ -1,4 +1,4 @@
-def VSaaSPlatforms = ['Amba', 'SStar']
+def VSAAS_PLATFORMS = ['Amba', 'SStar']
 
 pipeline {
     agent any 
@@ -6,8 +6,8 @@ pipeline {
         stage('Pipeline to seed or update all pipelines') {
             steps {
                 script {
-                    ${VSaaSPlatforms}.each { platform ->
-                        echo ${platform}
+                    VSAAS_PLATFORMS.each { platform ->
+                        echo platform
                     }
                 }
                 // jobDsl  targets: ['*.groovy'].join('\n')
