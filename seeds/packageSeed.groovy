@@ -4,12 +4,12 @@ folder('packages') {
     description('Folder for packages')
 }
 PLATFORMS.each { platform ->
-    pipelineJob("packages/Theone-$platform-test") {
+    pipelineJob("packages/Theone-$platform") {
         definition {
             cps {
                 // add "this" to fix "Scripts not permitted"
                 // https://issues.jenkins.io/browse/JENKINS-45778
-                script(this.readFileFromWorkspace('build-theone.groovy'))
+                script(this.readFileFromWorkspace('pipelines/build-theone.groovy'))
                 sandbox()
             }
         }
