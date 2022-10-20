@@ -24,7 +24,8 @@ pipeline {
                                 parameters {
                                   stringParam('platform', "$platform", "$platform")
                                 }
-                          }"""
+                          }""",
+                       sandbox: true
                         
                     }
                 }
